@@ -16,5 +16,10 @@ namespace generatorKongruencyjny
         {
             InitializeComponent();
         }
+
+        private void zakończToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
