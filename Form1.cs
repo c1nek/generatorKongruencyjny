@@ -7,16 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace generatorKongruencyjny
 {
     public partial class Form1 : Form
     {
+        
         public Form1()
         {
             InitializeComponent();
             textBox5.Enabled = false;
             textBox6.Enabled = false;
+        }
+
+        Int64[] getLin(Int64[] seriesTab, Int64 m, Int64 a, Int64 b, TextBox textbox, ProgressBar progressBar)
+        {
+            progressBar.Maximum = seriesTab.Length;
+            progressBar.Value = 1;
+            textbox.AppendText(Convert.ToString(seriesTab[0]) + " ");
+
+            for (int i = 1; i < seriesTab.Length; i++)
+            {
+                seriesTab[i] = (i * Convert.ToInt64(seriesTab[i - 1]) + b) % m;
+                textbox.AppendText(Convert.ToString(seriesTab[i])+" ");
+                progressBar.Value++;
+            }
+
+            return seriesTab;
         }
 
         private void zakończToolStripMenuItem_Click(object sender, EventArgs e)
@@ -97,18 +115,38 @@ namespace generatorKongruencyjny
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Int64 a, b, c, d, m;
+            int seriesLenght = Convert.ToInt32(textBox1.Text);
+            Int64[] seriesTab = new Int64[seriesLenght];
+            Random firstBit = new Random();
+
+            int firstbit = firstBit.Next(0, 1000);
+
+            seriesTab[0] = firstbit;
+            
+
             if (radioButton1.Checked == true)
             {
-               // genLin();
+               m = Convert.ToInt64(textBox2.Text);
+               a = Convert.ToInt64(textBox3.Text);
+               b = Convert.ToInt64(textBox4.Text);
+
+
+              getLin(seriesTab, m, a, b, textBox7, progressBar1);
             }
             if (radioButton2.Checked == true)
             {
-                // genSqr();
+                // getSqr();
             }
             if (radioButton3.Checked == true)
             {
-                // genCub();
+                // getCub();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textBox7.Clear();
         }
 
 
