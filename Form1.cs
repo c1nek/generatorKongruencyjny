@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Numerics;
+using System.Threading;
 
 
 namespace generatorKongruencyjny
 {
     public partial class Form1 : Form
     {
-        
+        Stopwatch stoper = new Stopwatch();
         public Form1()
         {
             InitializeComponent();
@@ -23,35 +24,80 @@ namespace generatorKongruencyjny
             textBox6.Enabled = false;
         }
 
-        BigInteger[] getLin(BigInteger[] seriesTab, BigInteger m, BigInteger a, BigInteger b, TextBox textbox, ProgressBar progressBar)
+        BigInteger[] getLin(BigInteger[] seriesTab, BigInteger m, BigInteger a, BigInteger b, TextBox textbox, Label minelo, Label pozostalo, ProgressBar progressBar)
         {
+            stoper.Start();
             progressBar.Maximum = seriesTab.Length;
             progressBar.Value = 1;
             textbox.AppendText(Convert.ToString(seriesTab[0] % 2) + " ");
 
             for (int i = 1; i < seriesTab.Length; i++)
             {
+                if (i % 10 == 0)
+                {
+                    minelo.Text = Convert.ToString(stoper.Elapsed);
+                    minelo.Update();
+                    pozostalo.Text = Convert.ToString(TimeSpan.FromMilliseconds((seriesTab.Length * stoper.ElapsedMilliseconds / i) - stoper.ElapsedMilliseconds));
+                    pozostalo.Update();
+                }
                 seriesTab[i] = (a * (seriesTab[i - 1]) + b) % m;
                 textbox.AppendText(Convert.ToString(seriesTab[i] % 2)+" ");
                 progressBar.Value++;
+                
             }
-
-            return seriesTab;
+            stoper.Reset();
+            return seriesTab;       
         }
 
-        BigInteger[] getSqr(BigInteger[] seriesTab, BigInteger m, BigInteger a, BigInteger b, BigInteger c, TextBox textbox, ProgressBar progressBar)
+        BigInteger[] getSqr(BigInteger[] seriesTab, BigInteger m, BigInteger a, BigInteger b, BigInteger c, TextBox textbox, Label minelo, Label pozostalo, ProgressBar progressBar)
         {
+            stoper.Start();
             progressBar.Maximum = seriesTab.Length;
             progressBar.Value = 1;
             textbox.AppendText(Convert.ToString(seriesTab[0] % 2) + " ");
 
             for (int i = 1; i < seriesTab.Length; i++)
             {
-                seriesTab[i] = ((i * (seriesTab[i - 1])*(i * (seriesTab[i - 1])) + b*(i * (seriesTab[i - 1])) + c )% m);
+                if (i % 10 == 0)
+                {
+                    minelo.Text = Convert.ToString(stoper.Elapsed);
+                    minelo.Update();
+                    pozostalo.Text = Convert.ToString(TimeSpan.FromMilliseconds((seriesTab.Length * stoper.ElapsedMilliseconds / i) - stoper.ElapsedMilliseconds));
+                    pozostalo.Update();
+                }
+                seriesTab[i] = ((a * (seriesTab[i - 1])*(a * (seriesTab[i - 1])) + b*(a * (seriesTab[i - 1])) + c )% m);
+                textbox.AppendText(Convert.ToString(seriesTab[i] % 2) + " ");
+                progressBar.Value++;
+            }
+            stoper.Reset();
+            return seriesTab;
+        }
+
+        BigInteger[] getCub(BigInteger[] seriesTab, BigInteger m, BigInteger a, BigInteger b, BigInteger c, BigInteger d, TextBox textbox, Label minelo, Label pozostalo, ProgressBar progressBar)
+        {
+            stoper.Start();
+            progressBar.Maximum = seriesTab.Length;
+            progressBar.Value = 1;
+            textbox.AppendText(Convert.ToString(seriesTab[0] % 2) + " ");
+
+            for (int i = 1; i < seriesTab.Length; i++)
+            {
+                if (i % 10 == 0)
+                {
+                    minelo.Text = Convert.ToString(stoper.Elapsed);
+                    minelo.Update();
+                    pozostalo.Text = Convert.ToString(TimeSpan.FromMilliseconds((seriesTab.Length * stoper.ElapsedMilliseconds / i) - stoper.ElapsedMilliseconds));
+                    pozostalo.Update();
+                }
+                seriesTab[i] = ((a * (seriesTab[i - 1]) * (a * (seriesTab[i - 1])*(a * (seriesTab[i - 1])))) 
+                    + (b * (a * (seriesTab[i - 1])*b * (a * (seriesTab[i - 1])))) 
+                    + (c * (a * (seriesTab[i - 1])))
+                    + d) % m;
                 textbox.AppendText(Convert.ToString(seriesTab[i] % 2) + " ");
                 progressBar.Value++;
             }
 
+            stoper.Reset();
             return seriesTab;
         }
 
@@ -152,7 +198,7 @@ namespace generatorKongruencyjny
                b = BigInteger.Parse(textBox4.Text);
 
 
-              getLin(seriesTab, m, a, b, textBox7, progressBar1);
+               getLin(seriesTab, m, a, b, textBox7, label8, label9, progressBar1);
             }
             if (radioButton2.Checked == true)
             {
@@ -162,7 +208,7 @@ namespace generatorKongruencyjny
                 c = BigInteger.Parse(textBox5.Text);
 
 
-                getSqr(seriesTab, m, a, b, c, textBox7, progressBar1);
+                getSqr(seriesTab, m, a, b, c, textBox7, label8, label9, progressBar1);
             }
             if (radioButton3.Checked == true)
             {
@@ -173,7 +219,7 @@ namespace generatorKongruencyjny
                 d = BigInteger.Parse(textBox5.Text);
 
 
-                getCub(seriesTab, m, a, b, c, d, textBox7, progressBar1);
+                getCub(seriesTab, m, a, b, c, d, textBox7, label8, label9, progressBar1);
             }
         }
 
