@@ -72,6 +72,16 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.button4 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button10 = new System.Windows.Forms.Button();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.button11 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -379,7 +389,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1030, 228);
+            this.button1.Location = new System.Drawing.Point(1041, 228);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(93, 23);
             this.button1.TabIndex = 4;
@@ -446,14 +456,14 @@
             this.textBox8.Multiline = true;
             this.textBox8.Name = "textBox8";
             this.textBox8.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox8.Size = new System.Drawing.Size(1037, 90);
+            this.textBox8.Size = new System.Drawing.Size(1037, 56);
             this.textBox8.TabIndex = 12;
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(1053, 291);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 90);
+            this.button2.Size = new System.Drawing.Size(75, 56);
             this.button2.TabIndex = 13;
             this.button2.Text = "Wczytaj tekst";
             this.button2.UseVisualStyleBackColor = true;
@@ -461,9 +471,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(1053, 387);
+            this.button3.Location = new System.Drawing.Point(1053, 353);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 90);
+            this.button3.Size = new System.Drawing.Size(75, 64);
             this.button3.TabIndex = 14;
             this.button3.Text = "Zamień na BIN";
             this.button3.UseVisualStyleBackColor = true;
@@ -471,27 +481,28 @@
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(10, 387);
+            this.textBox9.Location = new System.Drawing.Point(10, 353);
             this.textBox9.Multiline = true;
             this.textBox9.Name = "textBox9";
             this.textBox9.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox9.Size = new System.Drawing.Size(1037, 90);
+            this.textBox9.Size = new System.Drawing.Size(1037, 64);
             this.textBox9.TabIndex = 15;
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(10, 483);
+            this.textBox10.Location = new System.Drawing.Point(10, 423);
             this.textBox10.Multiline = true;
             this.textBox10.Name = "textBox10";
+            this.textBox10.ReadOnly = true;
             this.textBox10.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox10.Size = new System.Drawing.Size(1037, 90);
+            this.textBox10.Size = new System.Drawing.Size(1037, 71);
             this.textBox10.TabIndex = 17;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(1053, 483);
+            this.button5.Location = new System.Drawing.Point(1053, 426);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 68);
+            this.button5.Size = new System.Drawing.Size(75, 46);
             this.button5.TabIndex = 18;
             this.button5.Text = "Szyfruj XOR";
             this.button5.UseVisualStyleBackColor = true;
@@ -499,7 +510,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(949, 228);
+            this.button4.Location = new System.Drawing.Point(960, 228);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 19;
@@ -509,7 +520,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(1053, 550);
+            this.button6.Location = new System.Drawing.Point(1053, 471);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 20;
@@ -517,11 +528,111 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(10, 512);
+            this.textBox11.Multiline = true;
+            this.textBox11.Name = "textBox11";
+            this.textBox11.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox11.Size = new System.Drawing.Size(1037, 64);
+            this.textBox11.TabIndex = 21;
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(10, 582);
+            this.textBox12.Multiline = true;
+            this.textBox12.Name = "textBox12";
+            this.textBox12.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox12.Size = new System.Drawing.Size(1037, 64);
+            this.textBox12.TabIndex = 22;
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(10, 652);
+            this.textBox13.Multiline = true;
+            this.textBox13.Name = "textBox13";
+            this.textBox13.ReadOnly = true;
+            this.textBox13.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox13.Size = new System.Drawing.Size(1037, 64);
+            this.textBox13.TabIndex = 23;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(1053, 512);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 64);
+            this.button7.TabIndex = 24;
+            this.button7.Text = "Wczytaj tekst";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(1053, 582);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 64);
+            this.button8.TabIndex = 25;
+            this.button8.Text = "Wczytaj klucz";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(1053, 650);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(75, 66);
+            this.button9.TabIndex = 26;
+            this.button9.Text = "Odszyfruj";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(879, 228);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.TabIndex = 27;
+            this.button10.Text = "Wyczyść";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // textBox14
+            // 
+            this.textBox14.Location = new System.Drawing.Point(10, 722);
+            this.textBox14.Multiline = true;
+            this.textBox14.Name = "textBox14";
+            this.textBox14.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox14.Size = new System.Drawing.Size(1037, 62);
+            this.textBox14.TabIndex = 28;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(1053, 722);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(75, 62);
+            this.button11.TabIndex = 29;
+            this.button11.Text = "Odkoduj";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1146, 741);
+            this.ClientSize = new System.Drawing.Size(1146, 821);
+            this.Controls.Add(this.button11);
+            this.Controls.Add(this.textBox14);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.textBox13);
+            this.Controls.Add(this.textBox12);
+            this.Controls.Add(this.textBox11);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button5);
@@ -605,6 +716,16 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.Button button11;
     }
 }
 

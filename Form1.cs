@@ -406,6 +406,137 @@ namespace generatorKongruencyjny
                 MessageBox.Show("Błąd. Nie można zapisać wskazenego pliku! \n " + ex.Message);
             }
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+        Stream myStream = null;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    if ((myStream = openFileDialog1.OpenFile()) != null)
+                    {
+                        using (myStream)
+                        {
+                            textBox11.Text = File.ReadAllText(openFileDialog1.FileName);
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Błąd. Nie można odczytać wskazenego pliku! \n " + ex.Message);
+                }
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Stream myStream = null;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    if ((myStream = openFileDialog1.OpenFile()) != null)
+                    {
+                        using (myStream)
+                        {
+                            textBox12.Text = File.ReadAllText(openFileDialog1.FileName);
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Błąd. Nie można odczytać wskazenego pliku! \n " + ex.Message);
+                }
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string textZaszyfBinString = textBox11.Text;
+            string keyString = usunSpacje(textBox12.Text);
+
+            
+            char[] temp;
+            temp = keyString.ToCharArray();
+            int[] numKey = new int[temp.Length];
+            for (int oooUq = 0; oooUq < temp.Length; oooUq++)
+                numKey[oooUq] = (int)temp[oooUq] - 48;
+
+            char[] temp2;
+            temp2 = textZaszyfBinString.ToCharArray();
+            int[] numZaszyf = new int[temp2.Length];
+            for (int oooU = 0; oooU < temp2.Length; oooU++)
+                numZaszyf[oooU] = (int)temp2[oooU] - 48;
+
+
+            int[] _odszyfr = new int[textZaszyfBinString.Length];
+
+
+
+
+            if (keyString.Length < textZaszyfBinString.Length)
+            {
+                MessageBox.Show("Za krótki klucz!");
+            }
+            else
+            {
+                for (int i = 0; i < textZaszyfBinString.Length; i++)
+                {
+                    _odszyfr[i] = (numKey[i] ^ numZaszyf[i]);
+                    textBox13.AppendText(Convert.ToString(_odszyfr[i]));
+                }
+
+               
+            }
+        }
+
+
+        Byte[] GetBytesFromBinaryString(String binary)
+        {
+            var list = new List<Byte>();
+
+            for (int i = 0; i < binary.Length; i += 8)
+            {
+                String t = binary.Substring(i, 8);
+
+                list.Add(Convert.ToByte(t, 2));
+            }
+
+            return list.ToArray();
+        }
+
+        
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            textBox7.Clear();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            var data = GetBytesFromBinaryString(textBox13.Text);
+
+            var text = Encoding.ASCII.GetString(data);
+
+            textBox14.Text = Convert.ToString(text);
+        }
         }
 
        
@@ -415,5 +546,5 @@ namespace generatorKongruencyjny
 
 
 
-    }
+    
 
