@@ -18,8 +18,9 @@ namespace generatorKongruencyjny
     public partial class Form1 : Form
     {
         Stopwatch stoper = new Stopwatch();
-        byte[] keyTab;
-        byte[] passTab;
+        public int lenght=0;
+        
+       // byte[] passTab;
         public Form1()
         {
             InitializeComponent();
@@ -74,7 +75,7 @@ namespace generatorKongruencyjny
                     pozostalo.Text = Convert.ToString(TimeSpan.FromMilliseconds((seriesTab.Length * stoper.ElapsedMilliseconds / i) - stoper.ElapsedMilliseconds));
                     pozostalo.Update();
                 }
-                seriesTab[i] = ((a * (seriesTab[i - 1])*(a * (seriesTab[i - 1])) + b*(a * (seriesTab[i - 1])) + c )% m);
+                seriesTab[i] = ((a * (seriesTab[i - 1]) * (seriesTab[i - 1])) + (b * (seriesTab[i - 1])) + c )% m;
                 temp = (int)(seriesTab[i] % 2);
                 keyTab[i] = Convert.ToByte(temp);
                 textbox.AppendText(Convert.ToString(seriesTab[i] % 2) + " ");
@@ -126,7 +127,6 @@ namespace generatorKongruencyjny
             }
             return sb.ToString();
         }
-
 
         private void zakończToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -192,7 +192,7 @@ namespace generatorKongruencyjny
         private void radioButton8_CheckedChanged(object sender, EventArgs e)
         {
             textBox2.Text = Convert.ToString(Math.Pow(2, 49)-1);
-            textBox3.Text = Convert.ToString(int.Parse("10003", System.Globalization.NumberStyles.HexNumber));
+            textBox3.Text = Convert.ToString(Math.Pow(13, 13));
             textBox4.Text = Convert.ToString(0);
         }
 
@@ -200,21 +200,20 @@ namespace generatorKongruencyjny
         private void radioButton9_CheckedChanged(object sender, EventArgs e)
         {
             textBox2.Text = Convert.ToString(Math.Pow(2, 49)-1);
-            textBox3.Text = Convert.ToString(int.Parse("10003", System.Globalization.NumberStyles.HexNumber));
+            textBox3.Text = Convert.ToString(int.Parse("48c227", System.Globalization.NumberStyles.HexNumber));
             textBox4.Text = Convert.ToString(0);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void button1_Click(object sender, EventArgs e)
         {
             BigInteger a, b, c, d, m;
             int seriesLenght = Convert.ToInt32(textBox1.Text);
+            lenght = seriesLenght;
             BigInteger[] seriesTab = new BigInteger[seriesLenght];
             byte[] keyTab = new byte[seriesLenght];
             Random firstBit = new Random();
 
-            int firstbit = firstBit.Next(5000, 99999999);
-
-            seriesTab[0] = 1;
+            seriesTab[0] = (int)Math.Pow(firstBit.Next(2,30), firstBit.Next(2,15));
             
 
             if (radioButton1.Checked == true)
@@ -294,7 +293,123 @@ namespace generatorKongruencyjny
         {
             string tekst = textBox8.Text;
             textBox9.Text = StringToBinary(textBox8.Text);
+
         }
+        string usunSpacje(string lancuch)
+        {
+            string bezSpacji;
+            bezSpacji = lancuch.Replace(" ", "");
+            return bezSpacji;
+        }
+        public byte[] keyTab;
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string textJawnyBinString = textBox9.Text;
+            string keyString = usunSpacje(textBox7.Text);
+
+           // int[] numText = textJawnyBinString.ToArray();
+           //int[] numKey = new int[keyString.Length];
+
+            
+            char[] temp;
+            temp = keyString.ToCharArray();
+            int[] numKey = new int[temp.Length];
+            for (int oooUq = 0; oooUq < temp.Length; oooUq++)
+                numKey[oooUq] = (int)temp[oooUq] - 48;
+
+            char[] temp2;
+            temp2 = textJawnyBinString.ToCharArray();
+            int[] numText = new int[temp2.Length];
+            for (int oooU = 0; oooU < temp2.Length; oooU++)
+                numText[oooU] = (int)temp2[oooU] - 48;
+
+
+            int[] _zaszyfr = new int[textJawnyBinString.Length];
+
+
+
+
+            if (keyString.Length < textJawnyBinString.Length)
+            {
+                MessageBox.Show("Wygenerowano za krótki klucz!");
+            }
+            else
+            {
+                for (int i = 0; i < textJawnyBinString.Length; i++)
+                {
+                    _zaszyfr[i] = (numText[i] ^ numKey[i]);
+                    textBox10.AppendText(Convert.ToString(_zaszyfr[i]));
+                }
+               
+            }
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+            try
+            {
+
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    {
+
+                        using (StreamWriter sw = new StreamWriter(saveFileDialog1.FileName))
+                        {
+
+                            sw.Write(textBox7.Text);
+
+                        }
+
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Błąd. Nie można zapisać wskazenego pliku! \n " + ex.Message);
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+         SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+            try
+            {
+
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    {
+
+                        using (StreamWriter sw = new StreamWriter(saveFileDialog1.FileName))
+                        {
+
+                            sw.Write(textBox10.Text);
+
+                        }
+
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Błąd. Nie można zapisać wskazenego pliku! \n " + ex.Message);
+            }
+        }
+        }
+
+       
+        
         }
 
 
