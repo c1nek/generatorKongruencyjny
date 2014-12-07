@@ -46,7 +46,12 @@ namespace generatorKongruencyjny
                     pozostalo.Text = Convert.ToString(TimeSpan.FromMilliseconds((seriesTab.Length * stoper.ElapsedMilliseconds / i) - stoper.ElapsedMilliseconds));
                     pozostalo.Update();
                 }
+                
                 seriesTab[i] = (a * (seriesTab[i - 1]) + b) % m;
+                if (seriesTab[i] < 0)
+                {
+                    seriesTab[i] *= -1;
+                }
                 temp = (int)(seriesTab[i] % 2);
                 keyTab[i] = Convert.ToByte(temp);
                 textbox.AppendText(Convert.ToString(seriesTab[i] % 2)+" ");
@@ -213,7 +218,14 @@ namespace generatorKongruencyjny
             byte[] keyTab = new byte[seriesLenght];
             Random firstBit = new Random();
 
-            seriesTab[0] = (int)Math.Pow(firstBit.Next(2,30), firstBit.Next(2,15));
+            if (checkBox1.Checked == false)
+            {
+                seriesTab[0] = (int)Math.Pow(firstBit.Next(2, 30), firstBit.Next(2, 15));
+            }
+            else
+            {
+                seriesTab[0] = Convert.ToInt32(textBox15.Text);
+            }
             
 
             if (radioButton1.Checked == true)
@@ -306,10 +318,6 @@ namespace generatorKongruencyjny
         {
             string textJawnyBinString = textBox9.Text;
             string keyString = usunSpacje(textBox7.Text);
-
-           // int[] numText = textJawnyBinString.ToArray();
-           //int[] numKey = new int[keyString.Length];
-
             
             char[] temp;
             temp = keyString.ToCharArray();
@@ -323,11 +331,7 @@ namespace generatorKongruencyjny
             for (int oooU = 0; oooU < temp2.Length; oooU++)
                 numText[oooU] = (int)temp2[oooU] - 48;
 
-
             int[] _zaszyfr = new int[textJawnyBinString.Length];
-
-
-
 
             if (keyString.Length < textJawnyBinString.Length)
             {
@@ -488,9 +492,6 @@ namespace generatorKongruencyjny
 
             int[] _odszyfr = new int[textZaszyfBinString.Length];
 
-
-
-
             if (keyString.Length < textZaszyfBinString.Length)
             {
                 MessageBox.Show("Za krótki klucz!");
@@ -515,7 +516,6 @@ namespace generatorKongruencyjny
             for (int i = 0; i < binary.Length; i += 8)
             {
                 String t = binary.Substring(i, 8);
-
                 list.Add(Convert.ToByte(t, 2));
             }
 
@@ -532,9 +532,7 @@ namespace generatorKongruencyjny
         private void button11_Click(object sender, EventArgs e)
         {
             var data = GetBytesFromBinaryString(textBox13.Text);
-
             var text = Encoding.ASCII.GetString(data);
-
             textBox14.Text = Convert.ToString(text);
         }
         }
